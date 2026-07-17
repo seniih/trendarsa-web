@@ -25,8 +25,10 @@ import {
   SectionHeading,
   Eyebrow,
   buttonClass,
+  GrainOverlay,
 } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
+import { Stat } from "@/components/Stat";
 import { VideoHero } from "@/components/VideoHero";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { ProjectCard } from "@/components/ProjectCard";
@@ -51,18 +53,19 @@ export default async function HomePage({
       {/* HERO */}
       <VideoHero poster="https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07?auto=format&fit=crop&w=2000&q=75">
         <Container className="pt-20">
-          <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-cream/25 bg-cream/10 px-4 py-1.5 text-sm font-medium text-cream backdrop-blur-sm">
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-2.5 rounded-full border border-cream/20 bg-cream/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.22em] text-cream backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-leaf-400 shadow-[0_0_10px_2px_var(--leaf-glow)]" />
               {t("hero.eyebrow")}
             </span>
-            <h1 className="mt-6 text-4xl font-semibold leading-[1.05] text-cream sm:text-6xl">
+            <h1 className="mt-7 text-[2.6rem] font-semibold leading-[1.03] text-cream sm:text-6xl lg:text-7xl">
               {t("hero.title")}
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/85">
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-cream/85">
               {t("hero.subtitle")}
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/projeler" className={buttonClass("gold")}>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link href="/projeler" className={buttonClass("primary")}>
                 {t("hero.ctaPrimary")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
@@ -76,22 +79,14 @@ export default async function HomePage({
       </VideoHero>
 
       {/* STATS */}
-      <div className="border-b border-forest-900/10 bg-cream">
+      <div className="relative border-b border-forest-900/10 bg-cream">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-leaf-500/60 to-transparent" />
         <Container>
-          <dl className="grid grid-cols-2 divide-forest-900/10 py-8 sm:grid-cols-4 sm:divide-x">
-            {[
-              { v: t("stats.projectsValue"), l: t("stats.projects") },
-              { v: t("stats.regionValue"), l: t("stats.region") },
-              { v: t("stats.secureValue"), l: t("stats.secure") },
-              { v: t("stats.infraValue"), l: t("stats.infra") },
-            ].map((s, i) => (
-              <div key={i} className="px-2 py-3 text-center sm:px-6">
-                <dt className="font-display text-2xl font-semibold text-forest-900 sm:text-3xl">
-                  {s.v}
-                </dt>
-                <dd className="mt-1 text-sm text-ink-soft">{s.l}</dd>
-              </div>
-            ))}
+          <dl className="grid grid-cols-2 divide-forest-900/10 py-10 sm:grid-cols-4 sm:divide-x">
+            <Stat value={t("stats.projectsValue")} label={t("stats.projects")} />
+            <Stat value={t("stats.regionValue")} label={t("stats.region")} />
+            <Stat value={t("stats.secureValue")} label={t("stats.secure")} />
+            <Stat value={t("stats.infraValue")} label={t("stats.infra")} />
           </dl>
         </Container>
       </div>
@@ -124,8 +119,21 @@ export default async function HomePage({
       </Section>
 
       {/* WHY LAND */}
-      <Section className="bg-forest-900 text-cream">
-        <Container>
+      <Section className="relative overflow-hidden bg-forest-950 text-cream">
+        <Image
+          src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=70"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-15"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-forest-950 via-forest-950/85 to-forest-950" />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute right-0 top-1/4 h-96 w-96 rounded-full opacity-30 blur-[110px] [background:radial-gradient(circle,rgba(97,188,69,0.5),transparent_65%)]"
+        />
+        <GrainOverlay className="opacity-[0.08]" />
+        <Container className="relative">
           <SectionHeading
             eyebrow={t("why.eyebrow")}
             title={t("why.title")}
@@ -133,7 +141,7 @@ export default async function HomePage({
             align="center"
             invert
           />
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: TrendingUp, k: "value" },
               { icon: ShieldCheck, k: "secure" },
@@ -141,8 +149,8 @@ export default async function HomePage({
               { icon: Wallet, k: "payment" },
             ].map(({ icon: Icon, k }, i) => (
               <Reveal key={k} delay={i * 0.08}>
-                <div className="h-full rounded-2xl border border-cream/10 bg-forest-950/40 p-6">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/15 text-gold-400">
+                <div className="group h-full rounded-2xl border border-cream/10 bg-cream/[0.04] p-6 backdrop-blur-sm transition-colors duration-300 hover:border-leaf-500/40">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-leaf-500/15 text-leaf-400 ring-1 ring-leaf-500/20 shadow-[0_0_24px_-6px_var(--leaf-glow)] transition-transform duration-300 group-hover:scale-110">
                     <Icon className="h-6 w-6" />
                   </span>
                   <h3 className="mt-5 font-display text-lg font-semibold text-cream">
@@ -166,22 +174,27 @@ export default async function HomePage({
             title={t("steps.title")}
             align="center"
           />
-          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="relative mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Adımları bağlayan ince çizgi (masaüstü) */}
+            <div
+              aria-hidden
+              className="absolute left-0 right-0 top-5 hidden h-px bg-gradient-to-r from-transparent via-leaf-500/30 to-transparent lg:block"
+            />
             {[
               { icon: Search, k: "one" },
               { icon: MessageCircle, k: "two" },
               { icon: MapPinned, k: "three" },
               { icon: FileCheck, k: "four" },
             ].map(({ icon: Icon, k }, i) => (
-              <Reveal key={k} delay={i * 0.08}>
+              <Reveal key={k} delay={i * 0.08} className="relative">
                 <div className="relative">
-                  <span className="font-display text-5xl font-semibold text-sand">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="absolute left-14 top-2 flex h-10 w-10 items-center justify-center rounded-full bg-forest-800 text-cream">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-leaf-500 text-forest-950 shadow-[var(--shadow-leaf)] ring-4 ring-cream">
                     <Icon className="h-5 w-5" />
                   </span>
-                  <h3 className="mt-4 font-display text-lg font-semibold text-forest-900">
+                  <span className="pointer-events-none absolute -top-3 right-2 font-display text-6xl font-semibold text-forest-900/[0.06]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-5 font-display text-lg font-semibold text-forest-900">
                     {t(`steps.items.${k}.title`)}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-soft">
@@ -209,8 +222,8 @@ export default async function HomePage({
               <ul className="mt-8 space-y-4">
                 {["one", "two", "three", "four", "five", "six"].map((k) => (
                   <li key={k} className="flex items-start gap-3">
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-forest-700 text-cream">
-                      <Check className="h-3.5 w-3.5" />
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-leaf-500 text-forest-950 shadow-[0_0_16px_-4px_var(--leaf-glow)]">
+                      <Check className="h-3.5 w-3.5" strokeWidth={3} />
                     </span>
                     <span className="text-forest-900">{t(`trust.items.${k}`)}</span>
                   </li>
@@ -232,17 +245,22 @@ export default async function HomePage({
           <div className="mt-14 grid gap-6 lg:grid-cols-3">
             {["one", "two", "three"].map((k, i) => (
               <Reveal key={k} delay={i * 0.08}>
-                <figure className="flex h-full flex-col rounded-2xl border border-forest-900/10 bg-cream p-7 shadow-[0_2px_20px_-12px_rgba(15,46,34,0.25)]">
-                  <Quote className="h-8 w-8 text-gold-500" />
-                  <blockquote className="mt-4 flex-1 text-forest-900">
+                <figure className="flex h-full flex-col rounded-2xl border border-forest-900/10 bg-cream p-7 shadow-[0_2px_20px_-12px_rgba(6,26,16,0.25)] transition-all duration-500 hover:-translate-y-1 hover:border-leaf-500/30 hover:shadow-cine">
+                  <Quote className="h-8 w-8 fill-current text-gold-400/80" />
+                  <blockquote className="mt-4 flex-1 leading-relaxed text-forest-900">
                     “{t(`testimonials.items.${k}.text`)}”
                   </blockquote>
-                  <figcaption className="mt-6 border-t border-forest-900/10 pt-4">
-                    <span className="font-display font-semibold text-forest-900">
-                      {t(`testimonials.items.${k}.name`)}
+                  <figcaption className="mt-6 flex items-center gap-3 border-t border-forest-900/10 pt-5">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-forest-900 font-display text-lg font-semibold text-leaf-400">
+                      {t(`testimonials.items.${k}.name`).charAt(0)}
                     </span>
-                    <span className="ml-2 text-sm text-ink-soft">
-                      {t(`testimonials.items.${k}.role`)}
+                    <span className="flex flex-col">
+                      <span className="font-display font-semibold text-forest-900">
+                        {t(`testimonials.items.${k}.name`)}
+                      </span>
+                      <span className="text-sm text-ink-soft">
+                        {t(`testimonials.items.${k}.role`)}
+                      </span>
                     </span>
                   </figcaption>
                 </figure>
@@ -286,21 +304,29 @@ export default async function HomePage({
           alt=""
           fill
           sizes="100vw"
-          className="object-cover opacity-20"
+          className="object-cover opacity-25"
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-forest-950/85 via-forest-950/70 to-forest-950/95" />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-full h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-[130px] [background:radial-gradient(circle,rgba(97,188,69,0.6),transparent_65%)]"
+        />
+        <GrainOverlay className="opacity-[0.08]" />
         <Container className="relative">
           <div className="mx-auto max-w-2xl text-center">
-            <Eyebrow>{site.name}</Eyebrow>
-            <h2 className="mt-4 text-3xl font-semibold text-cream sm:text-4xl">
+            <div className="flex justify-center">
+              <Eyebrow tone="leaf">{site.name}</Eyebrow>
+            </div>
+            <h2 className="mt-5 text-3xl font-semibold text-cream sm:text-[2.6rem]">
               {t("finalCta.title")}
             </h2>
-            <p className="mt-4 text-lg text-cream/80">{t("finalCta.subtitle")}</p>
-            <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+            <p className="mt-5 text-lg text-cream/80">{t("finalCta.subtitle")}</p>
+            <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
               <a
                 href={whatsappLink(t("contact.whatsappMsg"))}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={buttonClass("gold")}
+                className={buttonClass("primary")}
               >
                 {t("finalCta.whatsapp")}
               </a>

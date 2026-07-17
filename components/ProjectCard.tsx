@@ -49,7 +49,7 @@ export function ProjectCard({
       href={`/projeler/${project.slug}`}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-forest-900/10 bg-cream shadow-[0_2px_20px_-12px_rgba(15,46,34,0.25)] transition-all duration-300 hover:-translate-y-1 hover:shadow-soft"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-forest-900/10 bg-cream shadow-[0_2px_20px_-12px_rgba(6,26,16,0.25)] transition-all duration-500 hover:-translate-y-1.5 hover:border-leaf-500/40 hover:shadow-cine"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
@@ -57,7 +57,7 @@ export function ProjectCard({
           alt={project.title[locale]}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
         />
         {project.video && (
           <video
@@ -74,11 +74,11 @@ export function ProjectCard({
           <Badge tone={statusTone}>{statusLabel}</Badge>
           {project.installment && <Badge tone="gold">{t("installment")}</Badge>}
         </div>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest-950/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest-950/70 via-leaf-600/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-center gap-1.5 text-sm text-gold-600">
+        <div className="flex items-center gap-1.5 text-sm font-medium text-leaf-700">
           <MapPin className="h-3.5 w-3.5" />
           {project.region} · {project.city}
         </div>
@@ -91,7 +91,7 @@ export function ProjectCard({
 
         <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-forest-800">
           <span className="inline-flex items-center gap-1.5">
-            <Maximize className="h-4 w-4 text-gold-600" />
+            <Maximize className="h-4 w-4 text-leaf-600" />
             {project.area} m²
           </span>
           {project.emsal && (
@@ -105,7 +105,7 @@ export function ProjectCard({
           <span className="font-display text-xl font-semibold text-forest-900">
             {formatPriceTRY(project.priceTRY)}
           </span>
-          <span className="inline-flex items-center gap-1 text-sm font-medium text-gold-600 transition-transform group-hover:translate-x-0.5">
+          <span className="inline-flex items-center gap-1 text-sm font-semibold text-leaf-700 transition-transform group-hover:translate-x-0.5">
             {t("viewDetails")}
             <ArrowUpRight className="h-4 w-4" />
           </span>

@@ -28,7 +28,7 @@ export function LocaleSwitcher({ invert = false }: { invert?: boolean }) {
             className={cn(
               "rounded-full px-2.5 py-1 uppercase transition-colors",
               active
-                ? "bg-gold-500 text-forest-950"
+                ? "bg-leaf-500 text-forest-950"
                 : invert
                   ? "text-cream/70 hover:text-cream"
                   : "text-forest-700 hover:text-forest-900",

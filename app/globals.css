@@ -2,12 +2,13 @@
 
 /*
   Trend Arsa — tasarım sistemi
-  Konsept: "Topraktan servete" → derin orman yeşili + sıcak altın aksan.
+  Konsept: "Topraktan servete" → sinematik & lüks.
+  Derin orman yeşili zeminler + canlı yaprak yeşili (#61BC45) vurgu + rafine altın metalik detay.
 */
 
 :root {
   --background: #f7f4ee; /* kırık beyaz / krem */
-  --foreground: #1a1a17; /* antrasit */
+  --foreground: #16160f; /* antrasit */
 }
 
 @theme inline {
@@ -18,27 +19,46 @@
   --color-cream: #f7f4ee;
   --color-sand: #ece5d8;
 
-  --color-forest-950: #0a2018;
-  --color-forest-900: #0f2e22;
-  --color-forest-800: #143d2f;
-  --color-forest-700: #1c5240;
-  --color-forest-600: #276650;
-  --color-forest-500: #35836a;
+  /* Derin orman — koyu zeminler (daha zengin, sinematik) */
+  --color-forest-950: #061a10;
+  --color-forest-900: #0c2818;
+  --color-forest-800: #10331f;
+  --color-forest-700: #17492d;
+  --color-forest-600: #1f5e3a;
+  --color-forest-500: #2a7d4d;
 
-  --color-gold-600: #b3873a;
-  --color-gold-500: #c9a24b;
-  --color-gold-400: #dbb978;
-  --color-gold-300: #e8d0a0;
+  /* Yaprak — canlı marka aksanı (#61BC45 ailesi) */
+  --color-leaf-700: #3d8a2b;
+  --color-leaf-600: #4a9e33;
+  --color-leaf-500: #61bc45;
+  --color-leaf-400: #7ecd63;
+  --color-leaf-300: #a3dd8f;
+  --color-leaf-200: #c9ecbc;
 
-  --color-ink: #1a1a17;
+  /* Altın — rafine, üçüncül metalik detay */
+  --color-gold-600: #b0913f;
+  --color-gold-500: #c6a35a;
+  --color-gold-400: #dcc088;
+  --color-gold-300: #ecd9b4;
+
+  --color-ink: #16160f;
   --color-ink-soft: #4a4a42;
 
   /* Fontlar */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
 
-  /* Yumuşak gölge */
-  --shadow-soft: 0 10px 40px -12px rgb(15 46 34 / 0.18);
+  /* Gölgeler */
+  --shadow-soft: 0 10px 40px -12px rgb(6 26 16 / 0.22);
+  --shadow-cine: 0 30px 80px -24px rgb(6 26 16 / 0.55);
+  --shadow-leaf: 0 12px 34px -10px rgb(97 188 69 / 0.45);
+}
+
+/* Yaprak parıltısı — CTA/rozet ışıması */
+:root {
+  --leaf-glow: rgb(97 188 69 / 0.45);
+  /* İnce film greni (feTurbulence noise) — sinematik doku */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
 }
 
 * {
@@ -57,16 +77,34 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 ::selection {
-  background: var(--color-gold-400);
+  background: var(--color-leaf-400);
   color: var(--color-forest-950);
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Sinematik grain katmanı — .cine-grain ile bir overlay div'e uygulanır */
+.cine-grain {
+  background-image: var(--grain);
+  background-size: 140px 140px;
+}
+
+/* İnce yaprak alt-çizgi vurgusu (başlık highlight'ı) */
+.leaf-underline {
+  background-image: linear-gradient(
+    to right,
+    var(--color-leaf-500),
+    var(--color-leaf-400)
+  );
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 100% 0.18em;
 }
 
 @media (prefers-reduced-motion: reduce) {

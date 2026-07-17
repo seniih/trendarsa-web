@@ -51,7 +51,7 @@ export function Navbar() {
               scrolled || open ? "text-forest-900" : "text-cream",
             )}
           >
-            Trend<span className="text-gold-500">Arsa</span>
+            Trend<span className="text-leaf-500">Arsa</span>
           </span>
         </Link>
 
@@ -63,7 +63,7 @@ export function Navbar() {
               className={cn(
                 "text-sm font-medium transition-colors",
                 scrolled
-                  ? "text-forest-800 hover:text-gold-600"
+                  ? "text-forest-800 hover:text-leaf-600"
                   : "text-cream/90 hover:text-cream",
               )}
             >
@@ -74,7 +74,7 @@ export function Navbar() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <LocaleSwitcher invert={!scrolled} />
-          <a href={telLink()} className={buttonClass("gold", "px-5 py-2.5")}>
+          <a href={telLink()} className={buttonClass("primary", "px-5 py-2.5")}>
             <Phone className="h-4 w-4" />
             {site.phoneDisplay}
           </a>
@@ -112,7 +112,7 @@ export function Navbar() {
             </div>
             <div className="mt-3 flex items-center justify-between gap-3 border-t border-forest-900/10 pt-4">
               <LocaleSwitcher />
-              <a href={telLink()} className={buttonClass("gold", "flex-1")}>
+              <a href={telLink()} className={buttonClass("primary", "flex-1")}>
                 <Phone className="h-4 w-4" />
                 {t("call")}
               </a>
