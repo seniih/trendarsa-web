@@ -15,7 +15,7 @@ export function BlogCard({ post, locale }: { post: Post; locale: Locale }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-forest-900/10 bg-cream shadow-[0_2px_20px_-12px_rgba(15,46,34,0.25)] transition-all duration-300 hover:-translate-y-1 hover:shadow-soft"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-forest-900/10 bg-cream shadow-[0_2px_20px_-12px_rgba(6,26,16,0.25)] transition-all duration-500 hover:-translate-y-1.5 hover:border-leaf-500/40 hover:shadow-cine"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
         <Image
@@ -23,8 +23,9 @@ export function BlogCard({ post, locale }: { post: Post; locale: Locale }) {
           alt={post.title[locale]}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
         />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest-950/45 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </div>
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-center gap-2 text-xs text-ink-soft">
@@ -40,7 +41,7 @@ export function BlogCard({ post, locale }: { post: Post; locale: Locale }) {
         <p className="mt-2 line-clamp-2 flex-1 text-sm text-ink-soft">
           {post.excerpt[locale]}
         </p>
-        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-gold-600 transition-transform group-hover:translate-x-0.5">
+        <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-leaf-700 transition-transform group-hover:translate-x-0.5">
           {t("readMore")}
           <ArrowUpRight className="h-4 w-4" />
         </span>

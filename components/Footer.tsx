@@ -26,7 +26,7 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <span className="font-display text-2xl font-semibold text-cream">
-              Trend<span className="text-gold-500">Arsa</span>
+              Trend<span className="text-leaf-500">Arsa</span>
             </span>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-cream/70">
               {t("footer.tagline")}
@@ -43,7 +43,7 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               {explore.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="hover:text-gold-400">
+                  <Link href={l.href} className="hover:text-leaf-400">
                     {l.label}
                   </Link>
                 </li>
@@ -58,7 +58,7 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               {corporate.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="hover:text-gold-400">
+                  <Link href={l.href} className="hover:text-leaf-400">
                     {l.label}
                   </Link>
                 </li>
@@ -79,13 +79,13 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 shrink-0 text-gold-500" />
-                <a href={telLink()} className="hover:text-gold-400">
+                <a href={telLink()} className="hover:text-leaf-400">
                   {site.phoneDisplay}
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 shrink-0 text-gold-500" />
-                <a href={`mailto:${site.email}`} className="hover:text-gold-400">
+                <a href={`mailto:${site.email}`} className="hover:text-leaf-400">
                   {site.email}
                 </a>
               </li>
@@ -96,7 +96,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-cream/10 hover:bg-gold-500 hover:text-forest-950"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-cream/10 hover:bg-leaf-500 hover:text-forest-950"
               >
                 <InstagramIcon className="h-4 w-4" />
               </a>
@@ -105,7 +105,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-cream/10 hover:bg-gold-500 hover:text-forest-950"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-cream/10 hover:bg-leaf-500 hover:text-forest-950"
               >
                 <FacebookIcon className="h-4 w-4" />
               </a>

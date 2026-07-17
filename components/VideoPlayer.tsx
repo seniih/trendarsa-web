@@ -44,7 +44,7 @@ export function VideoPlayer({
             sizes="(max-width: 768px) 100vw, 66vw"
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-forest-950/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-forest-950/60 to-forest-950/15" />
           <button
             type="button"
             onClick={() => videoSrc && setPlaying(true)}
@@ -52,7 +52,7 @@ export function VideoPlayer({
             aria-label={label ?? "Play"}
             className="absolute inset-0 flex items-center justify-center"
           >
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gold-500 text-forest-950 shadow-soft transition-transform group-hover:scale-110">
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-leaf-500 text-forest-950 shadow-[var(--shadow-leaf)] ring-4 ring-leaf-500/20 transition-transform group-hover:scale-110">
               <Play className="ml-1 h-7 w-7 fill-current" />
             </span>
           </button>

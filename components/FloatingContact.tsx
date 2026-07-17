@@ -26,7 +26,7 @@ export function FloatingContact() {
       <a
         href={telLink()}
         aria-label={t("phone")}
-        className="flex h-12 w-12 items-center justify-center rounded-full bg-forest-800 text-cream shadow-soft transition-transform hover:scale-105"
+        className="flex h-12 w-12 items-center justify-center rounded-full bg-leaf-500 text-forest-950 shadow-[var(--shadow-leaf)] transition-transform hover:scale-105"
       >
         <Phone className="h-5 w-5" />
       </a>
