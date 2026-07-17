@@ -51,7 +51,7 @@ export default async function HomePage({
   return (
     <>
       {/* HERO */}
-      <VideoHero poster="https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07?auto=format&fit=crop&w=2000&q=75">
+      <VideoHero poster="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=2000&q=75">
         <Container className="pt-20">
           <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2.5 rounded-full border border-cream/20 bg-cream/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.22em] text-cream backdrop-blur-md">
