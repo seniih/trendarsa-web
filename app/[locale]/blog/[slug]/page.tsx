@@ -7,7 +7,8 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/data/projects";
 import { getPost, getPosts } from "@/data/posts";
 import { routing } from "@/i18n/routing";
-import { Container, Section, buttonClass } from "@/components/ui";
+import { Container, Section, buttonClass, GrainOverlay } from "@/components/ui";
+import { Reveal } from "@/components/Reveal";
 import { whatsappLink } from "@/data/site";
 
 export function generateStaticParams() {
@@ -59,7 +60,7 @@ export default async function BlogDetail({
           <Container className="max-w-3xl">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-forest-700 hover:text-gold-600"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-forest-700 transition-colors hover:text-leaf-600"
             >
               <ArrowLeft className="h-4 w-4" />
               {nav("blog")}
@@ -76,7 +77,7 @@ export default async function BlogDetail({
               {post.title[locale]}
             </h1>
 
-            <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-2xl">
+            <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-2xl shadow-cine">
               <Image
                 src={post.cover}
                 alt={post.title[locale]}
@@ -93,20 +94,29 @@ export default async function BlogDetail({
               ))}
             </div>
 
-            <div className="mt-12 rounded-2xl bg-forest-900 p-8 text-center text-cream">
-              <h2 className="font-display text-2xl font-semibold text-cream">
-                {cta("title")}
-              </h2>
-              <p className="mt-2 text-cream/80">{cta("subtitle")}</p>
-              <a
-                href={whatsappLink(contact("whatsappMsg"))}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={buttonClass("gold", "mt-6")}
-              >
-                {cta("whatsapp")}
-              </a>
-            </div>
+            <Reveal>
+              <div className="relative mt-12 overflow-hidden rounded-2xl bg-forest-900 p-8 text-center text-cream">
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-[90px] [background:radial-gradient(circle,rgba(97,188,69,0.6),transparent_65%)]"
+                />
+                <GrainOverlay className="opacity-[0.08]" />
+                <div className="relative">
+                  <h2 className="font-display text-2xl font-semibold text-cream">
+                    {cta("title")}
+                  </h2>
+                  <p className="mt-2 text-cream/80">{cta("subtitle")}</p>
+                  <a
+                    href={whatsappLink(contact("whatsappMsg"))}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={buttonClass("primary", "mt-6")}
+                  >
+                    {cta("whatsapp")}
+                  </a>
+                </div>
+              </div>
+            </Reveal>
           </Container>
         </Section>
       </div>
