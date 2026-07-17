@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/*
+  Trend Arsa — tasarım sistemi
+  Konsept: "Topraktan servete" → derin orman yeşili + sıcak altın aksan.
+*/
+
+:root {
+  --background: #f7f4ee; /* kırık beyaz / krem */
+  --foreground: #1a1a17; /* antrasit */
+}
+
+@theme inline {
+  /* Renkler */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-cream: #f7f4ee;
+  --color-sand: #ece5d8;
+
+  --color-forest-950: #0a2018;
+  --color-forest-900: #0f2e22;
+  --color-forest-800: #143d2f;
+  --color-forest-700: #1c5240;
+  --color-forest-600: #276650;
+  --color-forest-500: #35836a;
+
+  --color-gold-600: #b3873a;
+  --color-gold-500: #c9a24b;
+  --color-gold-400: #dbb978;
+  --color-gold-300: #e8d0a0;
+
+  --color-ink: #1a1a17;
+  --color-ink-soft: #4a4a42;
+
+  /* Fontlar */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  /* Yumuşak gölge */
+  --shadow-soft: 0 10px 40px -12px rgb(15 46 34 / 0.18);
+}
+
+* {
+  border-color: color-mix(in srgb, var(--color-forest-900) 12%, transparent);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: var(--color-gold-400);
+  color: var(--color-forest-950);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
