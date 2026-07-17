@@ -19,6 +19,7 @@ import { Container, Section, Badge, buttonClass } from "@/components/ui";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { ProjectCard } from "@/components/ProjectCard";
 import { MapEmbed } from "@/components/MapEmbed";
+import { Reveal } from "@/components/Reveal";
 import { routing } from "@/i18n/routing";
 import { WhatsAppIcon } from "@/components/FloatingContact";
 
@@ -76,7 +77,7 @@ export default async function ProjectDetail({
           <Container>
             <Link
               href="/projeler"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-forest-700 hover:text-gold-600"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-forest-700 transition-colors hover:text-leaf-600"
             >
               <ArrowLeft className="h-4 w-4" />
               {t("back")}
@@ -112,18 +113,17 @@ export default async function ProjectDetail({
                     </h2>
                     <div className="mt-4 grid gap-4 sm:grid-cols-2">
                       {project.gallery.map((img, i) => (
-                        <div
-                          key={i}
-                          className="relative aspect-[4/3] overflow-hidden rounded-xl"
-                        >
-                          <Image
-                            src={img}
-                            alt={`${project.title[locale]} ${i + 1}`}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 40vw"
-                            className="object-cover"
-                          />
-                        </div>
+                        <Reveal key={i} delay={i * 0.06}>
+                          <div className="group relative aspect-[4/3] overflow-hidden rounded-xl">
+                            <Image
+                              src={img}
+                              alt={`${project.title[locale]} ${i + 1}`}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 40vw"
+                              className="object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                          </div>
+                        </Reveal>
                       ))}
                     </div>
                   </div>
@@ -132,7 +132,8 @@ export default async function ProjectDetail({
 
               {/* Sağ: özet + CTA (yapışkan) */}
               <aside className="lg:sticky lg:top-28 lg:self-start">
-                <div className="rounded-2xl border border-forest-900/10 bg-cream p-6 shadow-soft">
+                <div className="relative overflow-hidden rounded-2xl border border-forest-900/10 bg-cream p-6 shadow-cine">
+                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-leaf-600 via-leaf-500 to-leaf-400" />
                   <h1 className="font-display text-2xl font-semibold leading-snug text-forest-900">
                     {project.title[locale]}
                   </h1>
@@ -140,7 +141,7 @@ export default async function ProjectDetail({
                     {formatPriceTRY(project.priceTRY)}
                   </p>
                   {project.installment && (
-                    <p className="mt-1 text-sm text-gold-600">
+                    <p className="mt-1 text-sm font-medium text-gold-600">
                       {c("installment")}
                     </p>
                   )}
@@ -152,7 +153,7 @@ export default async function ProjectDetail({
                         className="flex items-center justify-between text-sm"
                       >
                         <dt className="flex items-center gap-2 text-ink-soft">
-                          <Icon className="h-4 w-4 text-gold-600" />
+                          <Icon className="h-4 w-4 text-leaf-600" />
                           {label}
                         </dt>
                         <dd className="font-medium text-forest-900">{value}</dd>
@@ -208,8 +209,10 @@ export default async function ProjectDetail({
             {t("otherProjects")}
           </h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {others.map((p) => (
-              <ProjectCard key={p.slug} project={p} locale={locale} />
+            {others.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 0.08}>
+                <ProjectCard project={p} locale={locale} />
+              </Reveal>
             ))}
           </div>
         </Container>

@@ -8,6 +8,7 @@ import { Container, Section, buttonClass } from "@/components/ui";
 import { PageHeader } from "@/components/PageHeader";
 import { MapEmbed } from "@/components/MapEmbed";
 import { WhatsAppIcon } from "@/components/FloatingContact";
+import { Reveal } from "@/components/Reveal";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -66,29 +67,31 @@ export default async function ContactPage({
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
               <ul className="space-y-6">
-                {rows.map(({ icon: Icon, label, value, href }) => (
-                  <li key={label} className="flex items-start gap-4">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-forest-700/10 text-forest-700">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <p className="text-sm font-medium uppercase tracking-wide text-ink-soft">
-                        {label}
-                      </p>
-                      {href ? (
-                        <a
-                          href={href}
-                          className="mt-1 block font-display text-lg text-forest-900 hover:text-gold-600"
-                        >
-                          {value}
-                        </a>
-                      ) : (
-                        <p className="mt-1 font-display text-lg text-forest-900">
-                          {value}
+                {rows.map(({ icon: Icon, label, value, href }, i) => (
+                  <Reveal key={label} delay={i * 0.06}>
+                    <li className="flex items-start gap-4">
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-leaf-500/15 text-leaf-600 ring-1 ring-leaf-500/20">
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <p className="text-sm font-medium uppercase tracking-wide text-ink-soft">
+                          {label}
                         </p>
-                      )}
-                    </div>
-                  </li>
+                        {href ? (
+                          <a
+                            href={href}
+                            className="mt-1 block font-display text-lg text-forest-900 transition-colors hover:text-leaf-600"
+                          >
+                            {value}
+                          </a>
+                        ) : (
+                          <p className="mt-1 font-display text-lg text-forest-900">
+                            {value}
+                          </p>
+                        )}
+                      </div>
+                    </li>
+                  </Reveal>
                 ))}
               </ul>
 
@@ -121,7 +124,7 @@ export default async function ContactPage({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-forest-800 text-cream hover:bg-gold-500 hover:text-forest-950"
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-forest-800 text-cream transition-colors hover:bg-leaf-500 hover:text-forest-950"
                   >
                     <InstagramIcon className="h-5 w-5" />
                   </a>
@@ -130,7 +133,7 @@ export default async function ContactPage({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Facebook"
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-forest-800 text-cream hover:bg-gold-500 hover:text-forest-950"
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-forest-800 text-cream transition-colors hover:bg-leaf-500 hover:text-forest-950"
                   >
                     <FacebookIcon className="h-5 w-5" />
                   </a>
@@ -138,14 +141,16 @@ export default async function ContactPage({
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-forest-900/10 shadow-soft">
-              <MapEmbed
-                lat={site.address.lat}
-                lng={site.address.lng}
-                label={site.name}
-                zoom={15}
-              />
-            </div>
+            <Reveal delay={0.1}>
+              <div className="overflow-hidden rounded-2xl border border-forest-900/10 shadow-cine">
+                <MapEmbed
+                  lat={site.address.lat}
+                  lng={site.address.lng}
+                  label={site.name}
+                  zoom={15}
+                />
+              </div>
+            </Reveal>
           </div>
         </Container>
       </Section>
