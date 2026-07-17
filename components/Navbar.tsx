@@ -63,7 +63,7 @@ export function Navbar() {
               className={cn(
                 "text-sm font-medium transition-colors",
                 scrolled
-                  ? "text-forest-800 hover:text-leaf-600"
+                  ? "text-forest-800 hover:text-leaf-800"
                   : "text-cream/90 hover:text-cream",
               )}
             >
@@ -82,7 +82,7 @@ export function Navbar() {
 
         <button
           className={cn(
-            "inline-flex h-10 w-10 items-center justify-center rounded-full lg:hidden",
+            "inline-flex h-11 w-11 items-center justify-center rounded-full lg:hidden",
             scrolled || open
               ? "text-forest-900"
               : "text-cream",

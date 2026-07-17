@@ -33,16 +33,25 @@ export function Section({
 export function Eyebrow({
   children,
   tone = "gold",
+  invert = false,
 }: {
   children: React.ReactNode;
   tone?: "gold" | "leaf";
+  /** Koyu (forest) zeminde mi kullanılıyor — açık zeminde metin kontrastı için daha koyu ton seçer. */
+  invert?: boolean;
 }) {
   const leaf = tone === "leaf";
   return (
     <span
       className={cn(
         "inline-flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.28em]",
-        leaf ? "text-leaf-600" : "text-gold-600",
+        leaf
+          ? invert
+            ? "text-leaf-600"
+            : "text-leaf-800"
+          : invert
+            ? "text-gold-600"
+            : "text-gold-700",
       )}
     >
       <span
@@ -74,7 +83,7 @@ export function SectionHeading({
         align === "center" && "mx-auto text-center",
       )}
     >
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      {eyebrow && <Eyebrow invert={invert}>{eyebrow}</Eyebrow>}
       <h2
         className={cn(
           "mt-5 text-3xl font-semibold leading-[1.1] sm:text-[2.6rem]",
@@ -161,8 +170,8 @@ export function Badge({
 }) {
   const tones: Record<string, string> = {
     sand: "bg-sand text-forest-800",
-    gold: "bg-gold-500/15 text-gold-600 ring-1 ring-gold-500/30",
-    green: "bg-leaf-500/15 text-leaf-700 ring-1 ring-leaf-500/30",
+    gold: "bg-gold-500/15 text-gold-700 ring-1 ring-gold-500/30",
+    green: "bg-leaf-500/15 text-leaf-800 ring-1 ring-leaf-500/30",
     muted: "bg-ink/8 text-ink-soft",
   };
   return (

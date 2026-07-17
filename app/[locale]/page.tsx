@@ -315,7 +315,9 @@ export default async function HomePage({
         <Container className="relative">
           <div className="mx-auto max-w-2xl text-center">
             <div className="flex justify-center">
-              <Eyebrow tone="leaf">{site.name}</Eyebrow>
+              <Eyebrow tone="leaf" invert>
+                {site.name}
+              </Eyebrow>
             </div>
             <h2 className="mt-5 text-3xl font-semibold text-cream sm:text-[2.6rem]">
               {t("finalCta.title")}

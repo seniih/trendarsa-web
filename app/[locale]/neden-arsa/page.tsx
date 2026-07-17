@@ -77,7 +77,7 @@ export default async function WhyPage({
                 <details className="group rounded-2xl border border-forest-900/10 bg-cream p-5 transition-colors duration-300 open:border-leaf-500/40 [&_summary::-webkit-details-marker]:hidden">
                   <summary className="flex cursor-pointer items-center justify-between gap-4 font-display text-lg font-medium text-forest-900">
                     {t(`faq.q${n}`)}
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-leaf-500/15 text-leaf-600 transition-transform duration-300 group-open:rotate-45 group-open:bg-leaf-500 group-open:text-forest-950">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-leaf-500/15 text-leaf-800 transition-transform duration-300 group-open:rotate-45 group-open:bg-leaf-500 group-open:text-forest-950">
                       +
                     </span>
                   </summary>

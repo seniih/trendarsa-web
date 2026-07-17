@@ -77,7 +77,7 @@ export default async function ProjectDetail({
           <Container>
             <Link
               href="/projeler"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-forest-700 transition-colors hover:text-leaf-600"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-forest-700 transition-colors hover:text-leaf-800"
             >
               <ArrowLeft className="h-4 w-4" />
               {t("back")}
@@ -141,7 +141,7 @@ export default async function ProjectDetail({
                     {formatPriceTRY(project.priceTRY)}
                   </p>
                   {project.installment && (
-                    <p className="mt-1 text-sm font-medium text-gold-600">
+                    <p className="mt-1 text-sm font-medium text-gold-700">
                       {c("installment")}
                     </p>
                   )}
