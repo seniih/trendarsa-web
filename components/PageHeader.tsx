@@ -31,7 +31,11 @@ export function PageHeader({
       />
       <GrainOverlay className="opacity-[0.08]" />
       <Container className="relative">
-        {eyebrow && <Eyebrow tone="leaf">{eyebrow}</Eyebrow>}
+        {eyebrow && (
+          <Eyebrow tone="leaf" invert>
+            {eyebrow}
+          </Eyebrow>
+        )}
         <h1 className="mt-5 max-w-3xl text-4xl font-semibold leading-[1.05] text-cream sm:text-5xl lg:text-6xl">
           {title}
         </h1>

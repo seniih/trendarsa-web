@@ -26,7 +26,7 @@ export function LocaleSwitcher({ invert = false }: { invert?: boolean }) {
             onClick={() => router.replace(pathname, { locale: loc })}
             aria-current={active ? "true" : undefined}
             className={cn(
-              "rounded-full px-2.5 py-1 uppercase transition-colors",
+              "rounded-full px-3.5 py-2.5 uppercase transition-colors",
               active
                 ? "bg-leaf-500 text-forest-950"
                 : invert

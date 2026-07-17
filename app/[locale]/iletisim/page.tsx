@@ -80,7 +80,7 @@ export default async function ContactPage({
                         {href ? (
                           <a
                             href={href}
-                            className="mt-1 block font-display text-lg text-forest-900 transition-colors hover:text-leaf-600"
+                            className="mt-1 block font-display text-lg text-forest-900 transition-colors hover:text-leaf-800"
                           >
                             {value}
                           </a>

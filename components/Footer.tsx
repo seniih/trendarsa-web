@@ -96,7 +96,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-cream/10 hover:bg-leaf-500 hover:text-forest-950"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-cream/10 hover:bg-leaf-500 hover:text-forest-950"
               >
                 <InstagramIcon className="h-4 w-4" />
               </a>
@@ -105,7 +105,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-cream/10 hover:bg-leaf-500 hover:text-forest-950"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-cream/10 hover:bg-leaf-500 hover:text-forest-950"
               >
                 <FacebookIcon className="h-4 w-4" />
               </a>

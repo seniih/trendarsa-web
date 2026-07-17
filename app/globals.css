@@ -28,6 +28,7 @@
   --color-forest-500: #2a7d4d;
 
   /* Yaprak — canlı marka aksanı (#61BC45 ailesi) */
+  --color-leaf-800: #2f6d22; /* açık zeminde metin için — WCAG AA (4.5:1) */
   --color-leaf-700: #3d8a2b;
   --color-leaf-600: #4a9e33;
   --color-leaf-500: #61bc45;
@@ -36,6 +37,7 @@
   --color-leaf-200: #c9ecbc;
 
   /* Altın — rafine, üçüncül metalik detay */
+  --color-gold-700: #7c5f28; /* açık zeminde metin için — WCAG AA (4.5:1) */
   --color-gold-600: #b0913f;
   --color-gold-500: #c6a35a;
   --color-gold-400: #dcc088;

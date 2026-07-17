@@ -78,7 +78,7 @@ export function ProjectCard({
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-center gap-1.5 text-sm font-medium text-leaf-700">
+        <div className="flex items-center gap-1.5 text-sm font-medium text-leaf-800">
           <MapPin className="h-3.5 w-3.5" />
           {project.region} · {project.city}
         </div>
@@ -105,7 +105,7 @@ export function ProjectCard({
           <span className="font-display text-xl font-semibold text-forest-900">
             {formatPriceTRY(project.priceTRY)}
           </span>
-          <span className="inline-flex items-center gap-1 text-sm font-semibold text-leaf-700 transition-transform group-hover:translate-x-0.5">
+          <span className="inline-flex items-center gap-1 text-sm font-semibold text-leaf-800 transition-transform group-hover:translate-x-0.5">
             {t("viewDetails")}
             <ArrowUpRight className="h-4 w-4" />
           </span>

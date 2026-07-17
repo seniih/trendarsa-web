@@ -66,7 +66,7 @@ function FilterChip({
     <button
       onClick={onClick}
       className={cn(
-        "rounded-full px-4 py-2 text-sm font-medium transition-all duration-200",
+        "rounded-full px-4 py-3 text-sm font-medium transition-all duration-200",
         active
           ? "bg-leaf-500 text-forest-950 shadow-[var(--shadow-leaf)]"
           : "bg-cream text-forest-800 ring-1 ring-forest-900/15 hover:ring-leaf-500",

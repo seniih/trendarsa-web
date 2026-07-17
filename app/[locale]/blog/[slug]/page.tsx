@@ -60,7 +60,7 @@ export default async function BlogDetail({
           <Container className="max-w-3xl">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-forest-700 transition-colors hover:text-leaf-600"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-forest-700 transition-colors hover:text-leaf-800"
             >
               <ArrowLeft className="h-4 w-4" />
               {nav("blog")}
