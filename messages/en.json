@@ -1,0 +1,193 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "why": "Why Land?",
+    "blog": "Blog",
+    "contact": "Contact",
+    "call": "Call Now",
+    "whatsapp": "WhatsApp"
+  },
+  "common": {
+    "brand": "Trend Arsa",
+    "slogan": "The Road to Wealth Runs Through the Land",
+    "getInfo": "Get Info",
+    "callNow": "Call Now",
+    "whatsappCta": "Message on WhatsApp",
+    "viewAll": "View All",
+    "viewDetails": "View Details",
+    "readMore": "Read More",
+    "available": "For Sale",
+    "reserved": "Reserved",
+    "sold": "Sold",
+    "installment": "Easy Payment",
+    "area": "Area",
+    "emsal": "FAR",
+    "price": "Price",
+    "region": "Location",
+    "minRead": "min read"
+  },
+  "hero": {
+    "eyebrow": "Sakarya • Villa-Project Land",
+    "title": "The Road to Wealth Runs Through the Land",
+    "subtitle": "Villa-project plots with lake and nature views in and around Sakarya — zoned, subdivided and infrastructure-ready. Title-deed secured, easy payment.",
+    "ctaPrimary": "Explore Projects",
+    "ctaSecondary": "Call Now",
+    "scroll": "Scroll down"
+  },
+  "stats": {
+    "title": "Trend Arsa in Numbers",
+    "projects": "Active Projects",
+    "projectsValue": "5+",
+    "region": "Expertise Area",
+    "regionValue": "Sakarya",
+    "secure": "Security",
+    "secureValue": "Titled & Subdivided",
+    "infra": "Infrastructure",
+    "infraValue": "Road • Water • Power"
+  },
+  "featured": {
+    "eyebrow": "Featured Projects",
+    "title": "Investment Opportunities in the Heart of Nature",
+    "subtitle": "A selection of our villa-project plots with lake and forest views."
+  },
+  "why": {
+    "eyebrow": "Why Invest in Land?",
+    "title": "Land: The Most Solid Investment That Grows With Time",
+    "subtitle": "Bought in the right location with the right documents, land protects against inflation and appreciates over time.",
+    "items": {
+      "value": {
+        "title": "Appreciation",
+        "text": "In developing regions, land holds the highest long-term return potential of any asset."
+      },
+      "secure": {
+        "title": "Public Guarantee",
+        "text": "Municipality and title approved, subdivided plots — your investment is officially secured."
+      },
+      "infra": {
+        "title": "Ready Infrastructure",
+        "text": "Plots that gain value immediately, in projects with completed road, water and electricity."
+      },
+      "payment": {
+        "title": "Easy Payment",
+        "text": "Ease of ownership with budget-friendly plots and flexible payment plans."
+      }
+    }
+  },
+  "steps": {
+    "eyebrow": "How It Works",
+    "title": "Own Your Land in 4 Steps",
+    "items": {
+      "one": { "title": "Explore", "text": "Browse our projects and decide on the location and budget that suit you." },
+      "two": { "title": "Get in Touch", "text": "Reach our expert team via WhatsApp or phone and ask your questions." },
+      "three": { "title": "See On-Site", "text": "Inspect the plot on-site; review documents and zoning transparently." },
+      "four": { "title": "Get Your Title", "text": "Buy with confidence on an easy payment plan and receive your title deed." }
+    }
+  },
+  "trust": {
+    "eyebrow": "Assurance",
+    "title": "Why Trend Arsa?",
+    "items": {
+      "one": "All plots subdivided and title-deeded",
+      "two": "Municipality-approved zoning",
+      "three": "Projects with completed infrastructure",
+      "four": "Years of regional expertise in Sakarya",
+      "five": "Transparent process and professional advice",
+      "six": "Budget-friendly, easy payment options"
+    }
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "title": "What Our Investors Say",
+    "items": {
+      "one": { "name": "Murat K.", "role": "Investor", "text": "The process was transparent from start to finish. No question marks about title or zoning. My lake-view plot has already appreciated." },
+      "two": { "name": "Elif D.", "role": "Villa Owner", "text": "We bought the plot for our dream villa in nature from Trend Arsa. The team was very attentive." },
+      "three": { "name": "Serkan Y.", "role": "Investor", "text": "Thanks to the easy payment plan, I became an owner without straining my budget. Highly recommended." }
+    }
+  },
+  "blogPreview": {
+    "eyebrow": "Blog",
+    "title": "Land Investment Guide",
+    "subtitle": "What you need to know for a sound investment."
+  },
+  "finalCta": {
+    "title": "Own Your Land Today",
+    "subtitle": "Our expert team is ready to find the plot that fits you best. Get in touch now.",
+    "call": "Call Now",
+    "whatsapp": "Message on WhatsApp"
+  },
+  "projectsPage": {
+    "title": "Our Projects",
+    "subtitle": "Villa-project, zoned and subdivided plots in and around Sakarya.",
+    "all": "All",
+    "empty": "No projects in this region yet.",
+    "filterRegion": "Region"
+  },
+  "projectDetail": {
+    "specs": "Plot Specifications",
+    "gallery": "Gallery",
+    "location": "Location",
+    "ctaTitle": "Interested in this project?",
+    "ctaText": "Contact us now for price, payment plan and availability.",
+    "whatsappMsg": "Hello, I'd like information about the {project} project.",
+    "back": "All Projects",
+    "otherProjects": "Other Projects"
+  },
+  "about": {
+    "eyebrow": "About Us",
+    "title": "A Team That Believes in the Value of Land",
+    "lead": "Trend Arsa is an investment office producing villa-project land in and around Sakarya, built on years of experience.",
+    "p1": "By turning large plots of land into parcels suited to every budget, we help people build a peaceful life in nature and make a solid investment.",
+    "p2": "All our projects are subdivided, title-deeded and infrastructure-ready, approved by the municipality and land registry — so your investment is under public guarantee.",
+    "p3": "From discovery to title delivery, our expert team stands by you with transparency and trust throughout.",
+    "missionTitle": "Our Mission",
+    "mission": "To enable everyone to own land securely and on favorable terms.",
+    "visionTitle": "Our Vision",
+    "vision": "To be the region's most trusted land-investment brand."
+  },
+  "whyPage": {
+    "title": "Why Invest in Land?",
+    "subtitle": "Throughout history, land has been one of the safest stores of value.",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": {
+      "q1": "Do the plots have title deeds?",
+      "a1": "Yes. Every plot in our projects is subdivided with an individual title deed and has municipality-approved zoning.",
+      "q2": "Is there an easy payment / installment option?",
+      "a2": "Yes. We offer flexible payment plans to fit your budget. Contact us for details.",
+      "q3": "Can I see the plot on-site?",
+      "a3": "Of course. We host you at the plot's location and transparently show documents and zoning status.",
+      "q4": "Is the infrastructure (road, water, electricity) ready?",
+      "a4": "Our projects' infrastructure is completed or planned. We provide detailed information for each project."
+    }
+  },
+  "blogPage": {
+    "title": "Blog",
+    "subtitle": "What you need to know about land investment, zoning and title deeds."
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Our expert team is just a phone call away for your questions.",
+    "phone": "Phone",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "address": "Address",
+    "social": "Social Media",
+    "hours": "Working Hours",
+    "hoursValue": "Weekdays 09:00 – 18:00",
+    "whatsappMsg": "Hello, I'd like information about your land projects."
+  },
+  "footer": {
+    "tagline": "Villa-project, title-deeded, infrastructure-ready land in Sakarya.",
+    "explore": "Explore",
+    "corporate": "Corporate",
+    "contact": "Contact",
+    "rights": "All rights reserved.",
+    "madeWith": "Investing close to nature."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "text": "The page you're looking for may have been moved or removed.",
+    "home": "Back to Home"
+  }
+}

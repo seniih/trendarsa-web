@@ -1,0 +1,193 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "projects": "Projeler",
+    "about": "Hakkımızda",
+    "why": "Neden Arsa?",
+    "blog": "Blog",
+    "contact": "İletişim",
+    "call": "Hemen Ara",
+    "whatsapp": "WhatsApp"
+  },
+  "common": {
+    "brand": "Trend Arsa",
+    "slogan": "Servete Giden Yol Topraktan Geçer",
+    "getInfo": "Bilgi Al",
+    "callNow": "Hemen Ara",
+    "whatsappCta": "WhatsApp'tan Yaz",
+    "viewAll": "Tümünü Gör",
+    "viewDetails": "Detayları Gör",
+    "readMore": "Devamını Oku",
+    "available": "Satılık",
+    "reserved": "Rezerve",
+    "sold": "Satıldı",
+    "installment": "Kolay Ödeme",
+    "area": "Alan",
+    "emsal": "Emsal",
+    "price": "Fiyat",
+    "region": "Konum",
+    "minRead": "dk okuma"
+  },
+  "hero": {
+    "eyebrow": "Sakarya • Villa Projeli Arsa",
+    "title": "Servete Giden Yol Topraktan Geçer",
+    "subtitle": "Sakarya ve çevresinde göl ve doğa manzaralı, imarlı, ifrazlı ve altyapısı hazır villa projeli arsalar. Tapu güvenceli, kolay ödemeli.",
+    "ctaPrimary": "Projeleri Keşfet",
+    "ctaSecondary": "Hemen Ara",
+    "scroll": "Aşağı kaydır"
+  },
+  "stats": {
+    "title": "Rakamlarla Trend Arsa",
+    "projects": "Aktif Proje",
+    "projectsValue": "5+",
+    "region": "Uzmanlık Bölgesi",
+    "regionValue": "Sakarya",
+    "secure": "Güvence",
+    "secureValue": "Tapulu & İfrazlı",
+    "infra": "Altyapı",
+    "infraValue": "Yol • Su • Elektrik"
+  },
+  "featured": {
+    "eyebrow": "Öne Çıkan Projeler",
+    "title": "Doğanın Kalbinde Yatırım Fırsatları",
+    "subtitle": "Göl ve orman manzaralı, villa projeli arsalarımızdan bazıları."
+  },
+  "why": {
+    "eyebrow": "Neden Arsa Yatırımı?",
+    "title": "Toprak, Değerini Yıllara Yayan En Sağlam Yatırım",
+    "subtitle": "Doğru konumda, doğru belgelerle alınan arsa; enflasyona karşı korur ve zamanla değerlenir.",
+    "items": {
+      "value": {
+        "title": "Değer Artışı",
+        "text": "Gelişen bölgelerde arsa, uzun vadede en yüksek getiri potansiyeline sahip varlıktır."
+      },
+      "secure": {
+        "title": "Devlet Güvencesi",
+        "text": "Belediye ve tapu onaylı, ifrazlı parseller; yatırımınız resmi güvence altındadır."
+      },
+      "infra": {
+        "title": "Altyapı Hazır",
+        "text": "Yol, su ve elektrik altyapısı tamamlanmış projelerle hemen değer kazanan arsalar."
+      },
+      "payment": {
+        "title": "Kolay Ödeme",
+        "text": "Her bütçeye uygun parseller ve esnek ödeme planlarıyla sahip olma kolaylığı."
+      }
+    }
+  },
+  "steps": {
+    "eyebrow": "Nasıl Çalışır?",
+    "title": "4 Adımda Arsanıza Kavuşun",
+    "items": {
+      "one": { "title": "Keşfet", "text": "Projelerimizi inceleyin, size uygun konumu ve bütçeyi belirleyin." },
+      "two": { "title": "İletişime Geç", "text": "WhatsApp veya telefonla uzman ekibimize ulaşın, sorularınızı sorun." },
+      "three": { "title": "Yerinde Gör", "text": "Arsayı yerinde inceleyin; belgeleri ve imar durumunu şeffafça görün." },
+      "four": { "title": "Tapunu Al", "text": "Kolay ödeme planıyla güvenle satın alın, tapunuzu teslim alın." }
+    }
+  },
+  "trust": {
+    "eyebrow": "Güvence",
+    "title": "Neden Trend Arsa?",
+    "items": {
+      "one": "Tüm parseller ifrazlı ve tapulu",
+      "two": "Belediye onaylı imar durumu",
+      "three": "Altyapısı tamamlanmış projeler",
+      "four": "Sakarya'da yıllara dayanan bölge uzmanlığı",
+      "five": "Şeffaf süreç ve profesyonel danışmanlık",
+      "six": "Her bütçeye uygun, kolay ödeme seçenekleri"
+    }
+  },
+  "testimonials": {
+    "eyebrow": "Referanslar",
+    "title": "Yatırımcılarımız Ne Diyor?",
+    "items": {
+      "one": { "name": "Murat K.", "role": "Yatırımcı", "text": "Süreç baştan sona şeffaftı. Tapu ve imar konusunda hiçbir soru işareti kalmadı. Göl manzaralı arsam şimdiden değer kazandı." },
+      "two": { "name": "Elif D.", "role": "Villa Sahibi", "text": "Hayalini kurduğumuz doğa içindeki villamızın arsasını Trend Arsa'dan aldık. Ekip çok ilgiliydi." },
+      "three": { "name": "Serkan Y.", "role": "Yatırımcı", "text": "Kolay ödeme planı sayesinde bütçemi zorlamadan sahip oldum. Kesinlikle tavsiye ederim." }
+    }
+  },
+  "blogPreview": {
+    "eyebrow": "Blog",
+    "title": "Arsa Yatırımı Rehberi",
+    "subtitle": "Doğru yatırım için bilmeniz gerekenler."
+  },
+  "finalCta": {
+    "title": "Toprağınıza Bugün Sahip Olun",
+    "subtitle": "Uzman ekibimiz size en uygun arsayı bulmak için hazır. Hemen iletişime geçin.",
+    "call": "Hemen Ara",
+    "whatsapp": "WhatsApp'tan Yaz"
+  },
+  "projectsPage": {
+    "title": "Projelerimiz",
+    "subtitle": "Sakarya ve çevresinde villa projeli, imarlı ve ifrazlı arsalar.",
+    "all": "Tümü",
+    "empty": "Bu bölgede henüz proje bulunmuyor.",
+    "filterRegion": "Bölge"
+  },
+  "projectDetail": {
+    "specs": "Arsa Özellikleri",
+    "gallery": "Galeri",
+    "location": "Konum",
+    "ctaTitle": "Bu proje ilginizi mi çekti?",
+    "ctaText": "Fiyat, ödeme planı ve müsaitlik için hemen bize ulaşın.",
+    "whatsappMsg": "Merhaba, {project} projesi hakkında bilgi almak istiyorum.",
+    "back": "Tüm Projeler",
+    "otherProjects": "Diğer Projeler"
+  },
+  "about": {
+    "eyebrow": "Hakkımızda",
+    "title": "Toprağın Değerine İnanan Bir Ekip",
+    "lead": "Trend Arsa, yılların birikimiyle Sakarya ve çevresinde villa projeli arsa üretimi yapan bir yatırım ofisidir.",
+    "p1": "Büyük arazileri, her bütçeye uygun parsellere dönüştürerek insanların doğayla iç içe, huzurlu bir yaşam kurmalarına ve sağlam bir yatırım yapmalarına aracı oluyoruz.",
+    "p2": "Tüm projelerimiz ifrazlı, tapulu ve altyapısı hazırdır; belediye ve tapu onaylıdır. Böylece yatırımınız devlet güvencesi altındadır.",
+    "p3": "Uzman ekibimiz, keşiften tapu teslimine kadar tüm süreçte şeffaflık ve güvenle yanınızdadır.",
+    "missionTitle": "Misyonumuz",
+    "mission": "Herkesin uygun koşullarda, güvenle toprak sahibi olabilmesini sağlamak.",
+    "visionTitle": "Vizyonumuz",
+    "vision": "Bölgenin en güvenilir arsa yatırım markası olmak."
+  },
+  "whyPage": {
+    "title": "Neden Arsa Yatırımı?",
+    "subtitle": "Toprak, tarih boyunca en güvenli değer saklama araçlarından biri olmuştur.",
+    "faqTitle": "Sıkça Sorulan Sorular",
+    "faq": {
+      "q1": "Arsalar tapulu mu?",
+      "a1": "Evet. Tüm projelerimizdeki parseller ifrazlı ve müstakil tapuludur. Belediye onaylı imar durumuna sahiptir.",
+      "q2": "Kolay ödeme / taksit imkânı var mı?",
+      "a2": "Evet. Bütçenize uygun esnek ödeme planları sunuyoruz. Detaylar için bizimle iletişime geçebilirsiniz.",
+      "q3": "Arsayı yerinde görebilir miyim?",
+      "a3": "Elbette. Sizi arsanın konumunda ağırlıyor, belgeleri ve imar durumunu şeffafça gösteriyoruz.",
+      "q4": "Altyapı (yol, su, elektrik) hazır mı?",
+      "a4": "Projelerimizin altyapısı tamamlanmış veya planlanmıştır. Her proje için detaylı bilgi veriyoruz."
+    }
+  },
+  "blogPage": {
+    "title": "Blog",
+    "subtitle": "Arsa yatırımı, imar ve tapu hakkında bilmeniz gerekenler."
+  },
+  "contact": {
+    "title": "İletişim",
+    "subtitle": "Sorularınız için uzman ekibimiz bir telefon uzağınızda.",
+    "phone": "Telefon",
+    "whatsapp": "WhatsApp",
+    "email": "E-posta",
+    "address": "Adres",
+    "social": "Sosyal Medya",
+    "hours": "Çalışma Saatleri",
+    "hoursValue": "Hafta içi 09:00 – 18:00",
+    "whatsappMsg": "Merhaba, arsa projeleriniz hakkında bilgi almak istiyorum."
+  },
+  "footer": {
+    "tagline": "Sakarya'da villa projeli, tapulu ve altyapısı hazır arsalar.",
+    "explore": "Keşfet",
+    "corporate": "Kurumsal",
+    "contact": "İletişim",
+    "rights": "Tüm hakları saklıdır.",
+    "madeWith": "Doğayla iç içe yatırım."
+  },
+  "notFound": {
+    "title": "Sayfa Bulunamadı",
+    "text": "Aradığınız sayfa taşınmış veya kaldırılmış olabilir.",
+    "home": "Ana Sayfaya Dön"
+  }
+}
