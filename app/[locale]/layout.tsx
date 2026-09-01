@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { Inter, Fraunces } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { site } from "@/data/site";
 import { Navbar } from "@/components/Navbar";
@@ -11,17 +11,11 @@ import { FloatingContact } from "@/components/FloatingContact";
 import { OrganizationJsonLd } from "@/components/JsonLd";
 import "../globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin", "latin-ext"],
   display: "swap",
-});
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin", "latin-ext"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export function generateStaticParams() {
@@ -54,7 +48,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
         <NextIntlClientProvider>
