@@ -1,9 +1,18 @@
 /**
  * Arsa projeleri — çift dilli veri.
- * Şimdilik dosya tabanlı; ileride CMS'e taşınacak şekilde tiplenmiştir.
- * Görseller placeholder (Unsplash); video alanı doldurulunca oynatıcı videoyu kullanır,
- * boşsa poster görseli gösterilir. Gerçek video dosyaları public/videos altına eklenir.
+ *
+ * Kaynak artık Supabase: admin panelden (trendarsa-admin) girilen içerik,
+ * "TrendArsa sitesi" yayın hedefi seçildiğinde burada görünür. İki tablodan
+ * beslenir:
+ *   - `listings`  → arsa ilanları (trendarsa-app ile ortak; siteye özel
+ *     alanlar migration 20260903120100 ile eklendi)
+ *   - `projects`  → proje kayıtları (aynı içerik trendev-web'de de
+ *     yayınlanabilir)
+ *
+ * Bu dosya sadece tipleri tanımlar ve satırları `Project` şekline eşler.
  */
+
+import { supabase, r2Url } from "@/lib/supabase";
 
 export type Locale = "tr" | "en";
 
@@ -21,217 +30,207 @@ export interface Project {
   tags: Record<Locale, string[]>; // "Göl manzaralı", "İmarlı" vb.
   excerpt: Record<Locale, string>;
   description: Record<Locale, string[]>; // paragraflar
-  poster: string; // kapak görseli
+  /** R2 kapak görseli — admin panelden eklenene kadar `null`. */
+  poster: string | null;
   gallery: string[];
   video?: string; // /videos/xxx.mp4 (opsiyonel)
   coords?: { lat: number; lng: number };
 }
 
-const U = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=70`;
+/** Bu sitenin yayın hedefi kimliği. */
+const TARGET = "trendarsa-web";
 
-export const projects: Project[] = [
-  {
-    slug: "kaynarca-turnali-gol-manzarali",
-    featured: true,
-    status: "available",
-    title: {
-      tr: "Kaynarca Turnalı — Göl Manzaralı Villa Arsaları",
-      en: "Kaynarca Turnalı — Lake-View Villa Plots",
-    },
-    region: "Kaynarca Turnalı",
-    city: "Sakarya",
-    area: 447,
-    emsal: 0.4,
-    priceTRY: 2350000,
-    installment: true,
-    tags: {
-      tr: ["Göl manzaralı", "Villa projeli", "İfrazlı", "Tapu güvenceli"],
-      en: ["Lake view", "Villa project", "Subdivided", "Title-deed secured"],
-    },
-    excerpt: {
-      tr: "Kaynarca Turnalı'da göl manzaralı, 0.40 emsalli, altyapısı hazır villa projeli arsalar. 447 m²'den başlayan seçenekler.",
-      en: "Lake-view, ready-infrastructure villa plots in Kaynarca Turnalı with 0.40 emsal. Options starting from 447 m².",
-    },
-    description: {
-      tr: [
-        "Doğanın kalbinde, göl manzarasına hâkim bir konumda yer alan bu proje; villa yaşamının huzurunu yatırımın güvencesiyle birleştiriyor.",
-        "Tüm parseller ifrazlı ve tapuludur. Yol, su ve elektrik altyapısı hazırdır. Belediye onaylı imar durumu ve 0.40 emsal ile hayalinizdeki villayı inşa etmeye uygundur.",
-        "Kolay ödeme planları ile bütçenize uygun koşullarda sahip olma imkânı sunulmaktadır.",
-      ],
-      en: [
-        "Set on a lake-facing location in the heart of nature, this project combines the serenity of villa living with the security of investment.",
-        "All plots are subdivided with individual title deeds. Road, water and electricity infrastructure is ready. With municipality-approved zoning and 0.40 emsal, it is suitable for building your dream villa.",
-        "Flexible installment plans make ownership possible on terms that fit your budget.",
-      ],
-    },
-    poster: U("photo-1500382017468-9049fed747ef"),
-    gallery: [
-      U("photo-1500382017468-9049fed747ef"),
-      U("photo-1416879595882-3373a0480b5b"),
-      U("photo-1470252649378-9c29740c9fa8"),
-    ],
-    coords: { lat: 41.0361, lng: 30.3061 },
-  },
-  {
-    slug: "kaynarca-turnali-genis-parsel",
-    featured: true,
-    status: "available",
-    title: {
-      tr: "Kaynarca Turnalı — Geniş Parsel (954 m²)",
-      en: "Kaynarca Turnalı — Large Plot (954 m²)",
-    },
-    region: "Kaynarca Turnalı",
-    city: "Sakarya",
-    area: 954,
-    emsal: 0.4,
-    priceTRY: 4350000,
-    installment: true,
-    tags: {
-      tr: ["Geniş parsel", "Villa projeli", "Altyapı hazır"],
-      en: ["Large plot", "Villa project", "Ready infrastructure"],
-    },
-    excerpt: {
-      tr: "954 m² geniş parsel, 0.40 emsal, bahçeli villa yaşamına ve yatırıma uygun.",
-      en: "954 m² large plot with 0.40 emsal, ideal for garden villa living and investment.",
-    },
-    description: {
-      tr: [
-        "Geniş bahçeli bir villa hayali kuranlar için ideal, 954 m² tek parsel.",
-        "İfrazlı ve tapulu; altyapısı tamamlanmış proje kapsamındadır.",
-        "Yatırım değeri her geçen gün artan bölgede sınırlı sayıda parsel kalmıştır.",
-      ],
-      en: [
-        "An ideal 954 m² single plot for those dreaming of a villa with a large garden.",
-        "Subdivided and title-deeded, within a project with completed infrastructure.",
-        "A limited number of plots remain in this region of steadily rising investment value.",
-      ],
-    },
-    poster: U("photo-1416879595882-3373a0480b5b"),
-    gallery: [
-      U("photo-1416879595882-3373a0480b5b"),
-      U("photo-1501084817091-a4f3d1d19e07"),
-    ],
-    coords: { lat: 41.037, lng: 30.31 },
-  },
-  {
-    slug: "kirkpinar-gol-cephesi",
-    featured: true,
-    status: "available",
-    title: {
-      tr: "Kırkpınar — Göl Cepheli Yatırım Arsaları",
-      en: "Kırkpınar — Lakefront Investment Plots",
-    },
-    region: "Kırkpınar",
-    city: "Sakarya",
-    area: 500,
-    emsal: 0.3,
-    priceTRY: 3100000,
-    installment: true,
-    tags: {
-      tr: ["Sapanca Gölü yakını", "Doğayla iç içe", "İmarlı"],
-      en: ["Near Sapanca Lake", "In nature", "Zoned"],
-    },
-    excerpt: {
-      tr: "Sapanca çevresinin gözde bölgesi Kırkpınar'da doğayla iç içe, değerlenen arsalar.",
-      en: "Appreciating plots surrounded by nature in Kırkpınar, a favorite area around Sapanca.",
-    },
-    description: {
-      tr: [
-        "Sapanca Gölü'ne yakınlığı ve doğal dokusuyla Kırkpınar, hem yaşam hem yatırım için öne çıkıyor.",
-        "Parseller imarlı ve tapuludur; bölge turizm ve ikinci konut talebiyle sürekli değer kazanmaktadır.",
-      ],
-      en: [
-        "With its proximity to Lake Sapanca and natural setting, Kırkpınar stands out for both living and investment.",
-        "Plots are zoned and title-deeded; the region continuously gains value driven by tourism and second-home demand.",
-      ],
-    },
-    poster: U("photo-1470252649378-9c29740c9fa8"),
-    gallery: [U("photo-1470252649378-9c29740c9fa8"), U("photo-1441974231531-c6227db76b6e")],
-    coords: { lat: 40.703, lng: 30.28 },
-  },
-  {
-    slug: "kurtkoy-villa-projeli",
-    featured: false,
-    status: "available",
-    title: {
-      tr: "Kurtköy — Villa Projeli Parseller",
-      en: "Kurtköy — Villa-Project Plots",
-    },
-    region: "Kurtköy",
-    city: "Sakarya",
-    area: 420,
-    emsal: 0.35,
-    priceTRY: 1950000,
-    installment: true,
-    tags: {
-      tr: ["Uygun fiyat", "Villa projeli", "Kolay ödeme"],
-      en: ["Affordable", "Villa project", "Easy payment"],
-    },
-    excerpt: {
-      tr: "Her bütçeye uygun, villa projeli parsellerle Kurtköy'de arsa sahibi olun.",
-      en: "Own land in Kurtköy with budget-friendly, villa-project plots.",
-    },
-    description: {
-      tr: [
-        "Kurtköy, uygun giriş fiyatları ve güçlü değer artış potansiyeliyle ilk yatırım için ideal.",
-        "İfrazlı ve tapulu parseller, kolay ödeme seçenekleriyle sunulmaktadır.",
-      ],
-      en: [
-        "Kurtköy is ideal for a first investment with affordable entry prices and strong appreciation potential.",
-        "Subdivided, title-deeded plots are offered with easy payment options.",
-      ],
-    },
-    poster: U("photo-1441974231531-c6227db76b6e"),
-    gallery: [U("photo-1441974231531-c6227db76b6e")],
-    coords: { lat: 40.74, lng: 30.4 },
-  },
-  {
-    slug: "hacimercan-doga-icinde",
-    featured: false,
-    status: "reserved",
-    title: {
-      tr: "Hacımercan — Doğa İçinde Villa Arsaları",
-      en: "Hacımercan — Villa Plots in Nature",
-    },
-    region: "Hacımercan",
-    city: "Sakarya",
-    area: 600,
-    emsal: 0.3,
-    priceTRY: 2750000,
-    installment: true,
-    tags: {
-      tr: ["Orman manzarası", "Sakin bölge", "İmarlı"],
-      en: ["Forest view", "Quiet area", "Zoned"],
-    },
-    excerpt: {
-      tr: "Orman manzaralı, sakin bir yaşam ve sağlam yatırım için Hacımercan parselleri.",
-      en: "Forest-view Hacımercan plots for a quiet life and a solid investment.",
-    },
-    description: {
-      tr: [
-        "Şehrin gürültüsünden uzak, orman manzaralı Hacımercan; huzurlu bir villa yaşamı vaat ediyor.",
-        "Parseller imarlı ve tapuludur. Bölgedeki talep nedeniyle bazı parseller rezerve edilmiştir.",
-      ],
-      en: [
-        "Away from the city noise and with forest views, Hacımercan promises a peaceful villa life.",
-        "Plots are zoned and title-deeded. Due to demand, some plots are already reserved.",
-      ],
-    },
-    poster: U("photo-1501084817091-a4f3d1d19e07"),
-    gallery: [U("photo-1501084817091-a4f3d1d19e07")],
-    coords: { lat: 40.72, lng: 30.36 },
-  },
-];
-
-export function getProjects(): Project[] {
-  return projects;
+/** Tek parça metni paragraflara böler (ilanların `description` alanı için). */
+function paragraphs(value: string | null): string[] {
+  return (value ?? "")
+    .split(/\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean);
 }
 
-export function getFeaturedProjects(): Project[] {
-  return projects.filter((p) => p.featured);
+function bilingual(tr: string | null, en: string | null): Record<Locale, string> {
+  const trValue = tr?.trim() ?? "";
+  const enValue = en?.trim();
+  return { tr: trValue, en: enValue || trValue };
 }
 
-export function getProject(slug: string): Project | undefined {
-  return projects.find((p) => p.slug === slug);
+function bilingualList(tr: string[] | null, en: string[] | null): Record<Locale, string[]> {
+  const trValue = tr ?? [];
+  const enValue = en ?? [];
+  return { tr: trValue, en: enValue.length > 0 ? enValue : trValue };
+}
+
+function galleryUrls(keys: { storage_key: string; position: number }[]): string[] {
+  return [...keys]
+    .sort((a, b) => a.position - b.position)
+    .map((img) => r2Url(img.storage_key))
+    .filter((url): url is string => url !== null);
+}
+
+interface ListingRow {
+  slug: string | null;
+  featured: boolean;
+  sale_status: Project["status"] | null;
+  title: string;
+  title_en: string | null;
+  description: string | null;
+  description_en: string[] | null;
+  excerpt_tr: string | null;
+  excerpt_en: string | null;
+  tags_tr: string[] | null;
+  tags_en: string[] | null;
+  emsal: number | null;
+  installment: boolean;
+  price: number;
+  size_m2: number | null;
+  il: string;
+  ilce: string;
+  mahalle: string | null;
+  latitude: number;
+  longitude: number;
+  created_at: string;
+  listing_images: { storage_key: string; position: number }[];
+}
+
+interface ProjectRow {
+  slug: string | null;
+  featured: boolean;
+  status: Project["status"] | null;
+  title_tr: string | null;
+  title_en: string | null;
+  excerpt_tr: string | null;
+  excerpt_en: string | null;
+  description_tr: string[] | null;
+  description_en: string[] | null;
+  highlights_tr: string[] | null;
+  highlights_en: string[] | null;
+  district: string | null;
+  neighborhood: string | null;
+  city: string | null;
+  parcel_area_min: number | null;
+  price_range_min: number | null;
+  cover_image_key: string | null;
+  created_at: string;
+  project_images: { storage_key: string; position: number }[];
+}
+
+function mapListing(row: ListingRow): Project {
+  const gallery = galleryUrls(row.listing_images);
+  const descriptionTr = paragraphs(row.description);
+  return {
+    slug: row.slug ?? "",
+    featured: row.featured,
+    status: row.sale_status ?? "available",
+    title: bilingual(row.title, row.title_en),
+    region: row.mahalle?.trim() || row.ilce,
+    city: row.il,
+    area: row.size_m2 ?? 0,
+    emsal: row.emsal ?? undefined,
+    priceTRY: row.price,
+    installment: row.installment,
+    tags: bilingualList(row.tags_tr, row.tags_en),
+    excerpt: bilingual(row.excerpt_tr || descriptionTr[0] || "", row.excerpt_en),
+    description: {
+      tr: descriptionTr,
+      en: row.description_en?.length ? row.description_en : descriptionTr,
+    },
+    poster: gallery[0] ?? null,
+    gallery,
+    coords: { lat: row.latitude, lng: row.longitude },
+  };
+}
+
+function mapProject(row: ProjectRow): Project {
+  const gallery = galleryUrls(row.project_images);
+  const cover = r2Url(row.cover_image_key);
+  return {
+    slug: row.slug ?? "",
+    featured: row.featured,
+    status: row.status ?? "available",
+    title: bilingual(row.title_tr, row.title_en),
+    region: row.neighborhood?.trim() || row.district || "",
+    city: row.city ?? "Sakarya",
+    area: row.parcel_area_min ?? 0,
+    priceTRY: row.price_range_min ?? 0,
+    installment: true,
+    tags: bilingualList(row.highlights_tr, row.highlights_en),
+    excerpt: bilingual(row.excerpt_tr, row.excerpt_en),
+    description: {
+      tr: row.description_tr ?? [],
+      en: row.description_en?.length ? row.description_en : (row.description_tr ?? []),
+    },
+    poster: cover ?? gallery[0] ?? null,
+    gallery: cover ? [cover, ...gallery.filter((g) => g !== cover)] : gallery,
+  };
+}
+
+let projectsCache: Promise<Project[]> | null = null;
+
+async function fetchAll(): Promise<Project[]> {
+  if (!projectsCache) {
+    projectsCache = (async () => {
+      const [listings, projects] = await Promise.all([
+        supabase
+          .from("listings")
+          .select(
+            `slug, featured, sale_status, title, title_en, description, description_en,
+             excerpt_tr, excerpt_en, tags_tr, tags_en, emsal, installment, price, size_m2,
+             il, ilce, mahalle, latitude, longitude, created_at,
+             listing_images ( storage_key, position )`,
+          )
+          .contains("publish_targets", [TARGET])
+          .eq("status", "active")
+          .not("slug", "is", null),
+        supabase
+          .from("projects")
+          .select(
+            `slug, featured, status, title_tr, title_en, excerpt_tr, excerpt_en,
+             description_tr, description_en, highlights_tr, highlights_en,
+             district, neighborhood, city, parcel_area_min, price_range_min,
+             cover_image_key, created_at,
+             project_images ( storage_key, position )`,
+          )
+          .contains("publish_targets", [TARGET])
+          .not("slug", "is", null),
+      ]);
+
+      if (listings.error) {
+        throw new Error(`Supabase arsa ilanları sorgusu başarısız: ${listings.error.message}`);
+      }
+      if (projects.error) {
+        throw new Error(`Supabase proje sorgusu başarısız: ${projects.error.message}`);
+      }
+
+      const rows: { createdAt: string; project: Project }[] = [
+        ...(listings.data as unknown as ListingRow[]).map((row) => ({
+          createdAt: row.created_at,
+          project: mapListing(row),
+        })),
+        ...(projects.data as unknown as ProjectRow[]).map((row) => ({
+          createdAt: row.created_at,
+          project: mapProject(row),
+        })),
+      ];
+
+      // İki tablodan gelen kayıtlar tek listede: önce öne çıkanlar, sonra en yeniler.
+      rows.sort((a, b) => {
+        if (a.project.featured !== b.project.featured) return a.project.featured ? -1 : 1;
+        return a.createdAt < b.createdAt ? 1 : -1;
+      });
+      return rows.map((r) => r.project);
+    })();
+  }
+  return projectsCache;
+}
+
+export async function getProjects(): Promise<Project[]> {
+  return fetchAll();
+}
+
+export async function getFeaturedProjects(): Promise<Project[]> {
+  return (await fetchAll()).filter((p) => p.featured);
+}
+
+export async function getProject(slug: string): Promise<Project | undefined> {
+  return (await fetchAll()).find((p) => p.slug === slug);
 }

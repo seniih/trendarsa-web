@@ -13,19 +13,22 @@ import {
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/data/projects";
 import { getProject, getProjects } from "@/data/projects";
-import { site, whatsappLink, telLink } from "@/data/site";
+import { whatsappLink, telLink } from "@/data/site";
+import { getSiteInfo } from "@/data/site-content";
 import { formatPriceTRY } from "@/lib/utils";
 import { Container, Section, Badge, buttonClass } from "@/components/ui";
 import { VideoPlayer } from "@/components/VideoPlayer";
+import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 import { ProjectCard } from "@/components/ProjectCard";
 import { MapEmbed } from "@/components/MapEmbed";
 import { Reveal } from "@/components/Reveal";
 import { routing } from "@/i18n/routing";
 import { WhatsAppIcon } from "@/components/FloatingContact";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const projects = await getProjects();
   return routing.locales.flatMap((locale) =>
-    getProjects().map((p) => ({ locale, slug: p.slug })),
+    projects.map((p) => ({ locale, slug: p.slug })),
   );
 }
 
@@ -35,13 +38,13 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   if (!project) return {};
   const l = locale as Locale;
   return {
     title: project.title[l],
     description: project.excerpt[l],
-    openGraph: { images: [project.poster] },
+    openGraph: project.poster ? { images: [project.poster] } : undefined,
   };
 }
 
@@ -53,12 +56,13 @@ export default async function ProjectDetail({
   const { locale: rawLocale, slug } = await params;
   setRequestLocale(rawLocale);
   const locale = rawLocale as Locale;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   if (!project) notFound();
 
   const t = await getTranslations("projectDetail");
   const c = await getTranslations("common");
-  const others = getProjects().filter((p) => p.slug !== slug).slice(0, 3);
+  const others = (await getProjects()).filter((p) => p.slug !== slug).slice(0, 3);
+  const site = await getSiteInfo();
   const waMsg = t("whatsappMsg", { project: project.title[locale] });
 
   const specs = [
@@ -86,11 +90,17 @@ export default async function ProjectDetail({
             <div className="mt-6 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
               {/* Sol: medya + açıklama */}
               <div>
-                <VideoPlayer
-                  poster={project.poster}
-                  videoSrc={project.video}
-                  label={project.title[locale]}
-                />
+                {project.poster ? (
+                  <VideoPlayer
+                    poster={project.poster}
+                    videoSrc={project.video}
+                    label={project.title[locale]}
+                  />
+                ) : (
+                  <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
+                    <ImagePlaceholder />
+                  </div>
+                )}
 
                 <div className="mt-6 flex flex-wrap gap-2">
                   {project.tags[locale].map((tag) => (
@@ -166,7 +176,7 @@ export default async function ProjectDetail({
                       {t("ctaText")}
                     </p>
                     <a
-                      href={whatsappLink(waMsg)}
+                      href={whatsappLink(waMsg, site.whatsapp)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={buttonClass("gold", "w-full bg-[#25D366] text-white hover:bg-[#20bd5a]")}
@@ -174,7 +184,7 @@ export default async function ProjectDetail({
                       <WhatsAppIcon className="h-5 w-5" />
                       {c("whatsappCta")}
                     </a>
-                    <a href={telLink()} className={buttonClass("primary", "w-full")}>
+                    <a href={telLink(site.phoneIntl)} className={buttonClass("primary", "w-full")}>
                       <Phone className="h-4 w-4" />
                       {site.phoneDisplay}
                     </a>

@@ -10,6 +10,7 @@ import { routing } from "@/i18n/routing";
 import { Container, Section, buttonClass, GrainOverlay } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { whatsappLink } from "@/data/site";
+import { getSiteInfo } from "@/data/site-content";
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -48,6 +49,7 @@ export default async function BlogDetail({
   const common = await getTranslations("common");
   const cta = await getTranslations("finalCta");
   const contact = await getTranslations("contact");
+  const site = await getSiteInfo();
   const date = new Date(post.date).toLocaleDateString(
     locale === "tr" ? "tr-TR" : "en-US",
     { year: "numeric", month: "long", day: "numeric" },
@@ -107,7 +109,7 @@ export default async function BlogDetail({
                   </h2>
                   <p className="mt-2 text-cream/80">{cta("subtitle")}</p>
                   <a
-                    href={whatsappLink(contact("whatsappMsg"))}
+                    href={whatsappLink(contact("whatsappMsg"), site.whatsapp)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={buttonClass("primary", "mt-6")}

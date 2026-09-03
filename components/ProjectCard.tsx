@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import type { Project, Locale } from "@/data/projects";
 import { formatPriceTRY } from "@/lib/utils";
 import { Badge } from "./ui";
+import { ImagePlaceholder } from "./ImagePlaceholder";
 
 export function ProjectCard({
   project,
@@ -52,13 +53,17 @@ export function ProjectCard({
       className="group flex flex-col overflow-hidden rounded-2xl border border-forest-900/10 bg-cream shadow-[0_2px_20px_-12px_rgba(6,26,16,0.25)] transition-all duration-500 hover:-translate-y-1.5 hover:border-leaf-500/40 hover:shadow-cine"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
-        <Image
-          src={project.poster}
-          alt={project.title[locale]}
-          fill
-          sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
-        />
+        {project.poster ? (
+          <Image
+            src={project.poster}
+            alt={project.title[locale]}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
+          />
+        ) : (
+          <ImagePlaceholder />
+        )}
         {project.video && (
           <video
             ref={videoRef}
