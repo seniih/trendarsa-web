@@ -1,14 +1,16 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/data/site";
+import { getSiteInfo } from "@/data/site-content";
 import { getProjects } from "@/data/projects";
 import { getPosts } from "@/data/posts";
 import { routing } from "@/i18n/routing";
 
 const staticPaths = ["", "/projeler", "/neden-arsa", "/hakkimizda", "/blog", "/iletisim"];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const site = await getSiteInfo();
+  const projects = await getProjects();
   const dynamicPaths = [
-    ...getProjects().map((p) => `/projeler/${p.slug}`),
+    ...projects.map((p) => `/projeler/${p.slug}`),
     ...getPosts().map((p) => `/blog/${p.slug}`),
   ];
   const allPaths = [...staticPaths, ...dynamicPaths];

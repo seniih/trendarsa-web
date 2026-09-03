@@ -30,13 +30,14 @@ export default async function ProjectsPage({
   setRequestLocale(rawLocale);
   const locale = rawLocale as Locale;
   const t = await getTranslations("projectsPage");
+  const projects = await getProjects();
 
   return (
     <>
       <PageHeader title={t("title")} subtitle={t("subtitle")} />
       <Section className="bg-cream">
         <Container>
-          <ProjectsExplorer projects={getProjects()} locale={locale} />
+          <ProjectsExplorer projects={projects} locale={locale} />
         </Container>
       </Section>
     </>

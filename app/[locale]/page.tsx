@@ -18,7 +18,8 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/data/projects";
 import { getFeaturedProjects } from "@/data/projects";
 import { getPosts } from "@/data/posts";
-import { site, whatsappLink, telLink } from "@/data/site";
+import { whatsappLink, telLink } from "@/data/site";
+import { getSection, getSiteInfo, getStats } from "@/data/site-content";
 import {
   Container,
   Section,
@@ -44,34 +45,57 @@ export default async function HomePage({
   const locale = rawLocale as Locale;
 
   const t = await getTranslations();
-  const featured = getFeaturedProjects();
+  const [featured, hero, projectsMap, stats, site] = await Promise.all([
+    getFeaturedProjects(),
+    getSection("hero", locale),
+    getSection("projectsMap", locale),
+    getStats(locale),
+    getSiteInfo(),
+  ]);
   const posts = getPosts().slice(0, 3);
+
+  // Admin panelde boş bırakılan alanlar çeviri dosyasındaki değere düşer.
+  const statItems = stats.length > 0
+    ? stats
+    : [
+        { value: t("stats.projectsValue"), label: t("stats.projects") },
+        { value: t("stats.regionValue"), label: t("stats.region") },
+        { value: t("stats.secureValue"), label: t("stats.secure") },
+        { value: t("stats.infraValue"), label: t("stats.infra") },
+      ];
+  // Harita bloğu yalnızca panelden bir görsel yüklendiğinde gösterilir.
+  const showMap = projectsMap?.enabled !== false && Boolean(projectsMap?.image);
 
   // Hero videosu eklendiğinde: videoSrc="/videos/hero.mp4"
   return (
     <>
       {/* HERO */}
-      <VideoHero poster="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=2000&q=75">
+      <VideoHero
+        poster={
+          hero?.image ??
+          "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=2000&q=75"
+        }
+      >
         <Container className="pt-20">
           <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2.5 rounded-full border border-cream/20 bg-cream/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.22em] text-cream backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-leaf-400 shadow-[0_0_10px_2px_var(--leaf-glow)]" />
-              {t("hero.eyebrow")}
+              {hero?.eyebrow ?? t("hero.eyebrow")}
             </span>
             <h1 className="mt-7 text-[2.6rem] font-semibold leading-[1.03] text-cream sm:text-6xl lg:text-7xl">
-              {t("hero.title")}
+              {hero?.title ?? t("hero.title")}
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-cream/85">
-              {t("hero.subtitle")}
+              {hero?.subtitle ?? t("hero.subtitle")}
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link href="/projeler" className={buttonClass("primary")}>
-                {t("hero.ctaPrimary")}
+                {hero?.ctaPrimary ?? t("hero.ctaPrimary")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <a href={telLink()} className={buttonClass("ghost")}>
+              <a href={telLink(site.phoneIntl)} className={buttonClass("ghost")}>
                 <Phone className="h-4 w-4" />
-                {t("hero.ctaSecondary")}
+                {hero?.ctaSecondary ?? t("hero.ctaSecondary")}
               </a>
             </div>
           </div>
@@ -83,13 +107,43 @@ export default async function HomePage({
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-leaf-500/60 to-transparent" />
         <Container>
           <dl className="grid grid-cols-2 divide-forest-900/10 py-10 sm:grid-cols-4 sm:divide-x">
-            <Stat value={t("stats.projectsValue")} label={t("stats.projects")} />
-            <Stat value={t("stats.regionValue")} label={t("stats.region")} />
-            <Stat value={t("stats.secureValue")} label={t("stats.secure")} />
-            <Stat value={t("stats.infraValue")} label={t("stats.infra")} />
+            {statItems.map((stat) => (
+              <Stat key={stat.label} value={stat.value} label={stat.label} />
+            ))}
           </dl>
         </Container>
       </div>
+
+      {/* PROJECTS MAP — panelden görsel yüklendiğinde görünür */}
+      {showMap && projectsMap && (
+        <Section className="bg-sand">
+          <Container>
+            <div className="grid items-center gap-12 lg:grid-cols-2">
+              <SectionHeading
+                eyebrow={projectsMap.eyebrow ?? undefined}
+                title={projectsMap.title ?? ""}
+                subtitle={projectsMap.subtitle ?? undefined}
+              />
+              <Reveal>
+                <Link
+                  href="/projeler"
+                  className="group block overflow-hidden rounded-2xl border border-forest-900/10 shadow-[0_2px_20px_-12px_rgba(6,26,16,0.25)] transition-all duration-500 hover:-translate-y-1.5 hover:border-leaf-500/40 hover:shadow-cine"
+                >
+                  <div className="relative aspect-video w-full">
+                    <Image
+                      src={projectsMap.image!}
+                      alt={projectsMap.imageAlt ?? ""}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 560px"
+                      className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
+                    />
+                  </div>
+                </Link>
+              </Reveal>
+            </div>
+          </Container>
+        </Section>
+      )}
 
       {/* FEATURED PROJECTS */}
       <Section id="projeler" className="bg-cream">
@@ -325,14 +379,14 @@ export default async function HomePage({
             <p className="mt-5 text-lg text-cream/80">{t("finalCta.subtitle")}</p>
             <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
               <a
-                href={whatsappLink(t("contact.whatsappMsg"))}
+                href={whatsappLink(t("contact.whatsappMsg"), site.whatsapp)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={buttonClass("primary")}
               >
                 {t("finalCta.whatsapp")}
               </a>
-              <a href={telLink()} className={buttonClass("ghost")}>
+              <a href={telLink(site.phoneIntl)} className={buttonClass("ghost")}>
                 <Phone className="h-4 w-4" />
                 {site.phoneDisplay}
               </a>

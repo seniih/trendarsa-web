@@ -1,7 +1,11 @@
 /**
  * Trend Arsa — merkezi site sabitleri.
  * Gerçek iletişim bilgileri firma rehberi + Instagram'dan doğrulanarak alındı.
- * Güncelleme gerektiğinde tek yer burasıdır.
+ *
+ * ⚠️ Bu değerler artık yalnızca **yedek**: gerçek kaynak Supabase'deki
+ * `site_settings` tablosu ve admin panelidir (bkz. `data/site-content.ts` →
+ * `getSiteInfo`). Buradaki değerler DB'de satır/alan boş olduğunda devreye
+ * girer.
  */
 
 export const site = {
@@ -29,12 +33,16 @@ export const site = {
   },
 } as const;
 
-/** Önceden doldurulmuş mesajla WhatsApp bağlantısı üretir. */
-export function whatsappLink(message?: string): string {
-  const base = `https://wa.me/${site.whatsapp}`;
+/**
+ * Önceden doldurulmuş mesajla WhatsApp bağlantısı üretir. Numara verilmezse
+ * yukarıdaki statik değer kullanılır; sayfalar admin panelden gelen numarayı
+ * (bkz. `data/site-content.ts` → `getSiteInfo`) ikinci parametreyle geçer.
+ */
+export function whatsappLink(message?: string, whatsapp: string = site.whatsapp): string {
+  const base = `https://wa.me/${whatsapp}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
-export function telLink(): string {
-  return `tel:${site.phoneIntl}`;
+export function telLink(phoneIntl: string = site.phoneIntl): string {
+  return `tel:${phoneIntl}`;
 }

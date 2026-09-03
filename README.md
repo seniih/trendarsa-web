@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trend Arsa (trendarsa-web)
 
-## Getting Started
+Trend Arsa Yatırım Ofisi'nin villa projeli arsa ilanlarını tanıtan, iki dilli
+(TR/EN) Next.js sitesi. İçerik **trendarsa-admin** panelinden girilir ve
+trendarsa-app ile ortak Supabase veritabanından build sırasında okunur.
 
-First, run the development server:
+## Kurulum
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env      # Supabase URL/anon key + R2 public base URL
+npm run dev               # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`SUPABASE_URL` / `SUPABASE_ANON_KEY` tanımlı değilse build başlar başlamaz
+hata verir (bkz. `lib/supabase.ts`) — deploy ortamında da (Cloudflare Pages →
+Settings → Environment variables) tanımlı olmaları gerekir.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## İçerik nereden geliyor
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Sayfa parçası | Kaynak |
+| --- | --- |
+| Proje kartları ve detay sayfaları | `listings` + `projects` tabloları, `publish_targets` içinde `trendarsa-web` olanlar (`data/projects.ts`) |
+| Açılış (hero) ve harita bloğu | `site_sections` (`data/site-content.ts`) |
+| Rakam şeridi | `site_stats` |
+| Telefon, WhatsApp, e-posta, adres, harita konumu | `site_settings` |
+| Diğer sabit metinler (menü, "Neden Arsa", adımlar…) | `messages/tr.json` · `messages/en.json` |
+| Blog yazıları | `data/posts.ts` (hâlâ dosya tabanlı) |
 
-## Learn More
+DB'de satır yoksa veya alan boşsa çeviri dosyaları ile `data/site.ts`
+içindeki değerlere düşülür; yani veritabanı boşken de site dolu görünür.
 
-To learn more about Next.js, take a look at the following resources:
+Görseller Cloudflare R2'de tutulur; `R2_PUBLIC_BASE_URL` hem `lib/supabase.ts`
+içindeki `r2Url()` hem de `next.config.ts`'deki `images.remotePatterns` için
+kullanılır.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## İçerik güncelleme akışı
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. trendarsa-admin panelinden ilan/proje veya site içeriği düzenlenir.
+2. Site statik build edildiği için yeniden deploy edilmelidir (otomatik
+   deploy-hook yok).
