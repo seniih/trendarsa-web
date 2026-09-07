@@ -60,6 +60,15 @@ function bilingualList(tr: string[] | null, en: string[] | null): Record<Locale,
   return { tr: trValue, en: enValue.length > 0 ? enValue : trValue };
 }
 
+/** excerpt_tr/en boşsa açıklamanın ilk paragrafına düşer. */
+function resolveExcerpt(
+  excerptTr: string | null,
+  excerptEn: string | null,
+  descriptionTr: string[],
+): Record<Locale, string> {
+  return bilingual(excerptTr || descriptionTr[0] || "", excerptEn);
+}
+
 function galleryUrls(keys: { storage_key: string; position: number }[]): string[] {
   return [...keys]
     .sort((a, b) => a.position - b.position)
@@ -129,7 +138,7 @@ function mapListing(row: ListingRow): Project {
     priceTRY: row.price,
     installment: row.installment,
     tags: bilingualList(row.tags_tr, row.tags_en),
-    excerpt: bilingual(row.excerpt_tr || descriptionTr[0] || "", row.excerpt_en),
+    excerpt: resolveExcerpt(row.excerpt_tr, row.excerpt_en, descriptionTr),
     description: {
       tr: descriptionTr,
       en: row.description_en?.length ? row.description_en : descriptionTr,
@@ -154,7 +163,7 @@ function mapProject(row: ProjectRow): Project {
     priceTRY: row.price_range_min ?? 0,
     installment: true,
     tags: bilingualList(row.highlights_tr, row.highlights_en),
-    excerpt: bilingual(row.excerpt_tr, row.excerpt_en),
+    excerpt: resolveExcerpt(row.excerpt_tr, row.excerpt_en, row.description_tr ?? []),
     description: {
       tr: row.description_tr ?? [],
       en: row.description_en?.length ? row.description_en : (row.description_tr ?? []),
@@ -206,10 +215,13 @@ async function fetchAll(): Promise<Project[]> {
           createdAt: row.created_at,
           project: mapListing(row),
         })),
-        ...(projects.data as unknown as ProjectRow[]).map((row) => ({
-          createdAt: row.created_at,
-          project: mapProject(row),
-        })),
+        ...(projects.data as unknown as ProjectRow[])
+          // Başlığı olmayan proje kaydı (henüz panelden tamamlanmamış) yayınlanmaz.
+          .filter((row) => row.title_tr?.trim() || row.title_en?.trim())
+          .map((row) => ({
+            createdAt: row.created_at,
+            project: mapProject(row),
+          })),
       ];
 
       // İki tablodan gelen kayıtlar tek listede: önce öne çıkanlar, sonra en yeniler.
@@ -217,7 +229,20 @@ async function fetchAll(): Promise<Project[]> {
         if (a.project.featured !== b.project.featured) return a.project.featured ? -1 : 1;
         return a.createdAt < b.createdAt ? 1 : -1;
       });
-      return rows.map((r) => r.project);
+
+      // `listings` ve `projects` slug'ları ayrı ayrı benzersiz ama birbirine göre değil;
+      // çakışma olursa ilkini (öne çıkan/en yeni sıralamasından sonraki ilk) tutup uyar.
+      const seenSlugs = new Set<string>();
+      const deduped: Project[] = [];
+      for (const { project } of rows) {
+        if (seenSlugs.has(project.slug)) {
+          console.warn(`[projects] slug çakışması, yinelenen kayıt atlandı: "${project.slug}"`);
+          continue;
+        }
+        seenSlugs.add(project.slug);
+        deduped.push(project);
+      }
+      return deduped;
     })();
   }
   return projectsCache;
