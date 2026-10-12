@@ -53,4 +53,5 @@ next-env.d.ts
 # local AI agents / tools
 .claude/
 CLAUDE.md
+AGENTS.md
 
